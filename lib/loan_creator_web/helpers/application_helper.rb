@@ -1,7 +1,16 @@
 require 'pry'
+require 'date'
 
 module LoanCreatorWeb
   module ApplicationHelper
+
+    PERIODS_IN_MONTHS = {
+      month: 1,
+      quarter: 3,
+      semester: 6,
+      year: 12
+    }.freeze
+
     def fix_params_type(params)
       params = params.merge({ initial_values: {} }) if params[:initial_values].nil?
 
@@ -13,7 +22,7 @@ module LoanCreatorWeb
         h[:annual_interests_rate] = to_right_format(params: 'annual_interests_rate', value: params[:annual_interests_rate])
         h[:starts_on] = to_right_format(params: 'starts_on', value: params[:starts_on])
         h[:duration_in_periods] = to_right_format(params: 'duration_in_periods', value: params[:duration_in_periods])
-        h[:term_dates] = build_term_dates_array if params[:button] == 'update'
+        h[:term_dates] = build_term_dates_params if params[:button] == 'update'
         h[:initial_values] = {}.tap do |ivh|
           ivh[:paid_capital] = to_right_format(params: 'paid_capital', value: params[:initial_values][:paid_capital])
           ivh[:paid_interests] = to_right_format(params: 'paid_interests', value: params[:initial_values][:paid_interests])
@@ -66,8 +75,11 @@ module LoanCreatorWeb
       (initial_value.present? && initial_value.zero?) ? nil : initial_value
     end
 
-    def build_term_dates_array
-      to_right_format(params: 'term_dates', value: params[:term_dates]).unshift(params[:starts_on])
+    def build_term_dates_params
+      # need to catch the start date - one period to calculate the first term date due
+      start_date = to_right_format(params: 'starts_on', value: params[:starts_on])
+      start_date_previous_period = start_date.advance(months: -PERIODS_IN_MONTHS.fetch(params[:period].to_sym))
+      to_right_format(params: 'term_dates', value: params[:term_dates]).unshift(start_date_previous_period)
     end
   end
 end
