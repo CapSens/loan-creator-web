@@ -8,7 +8,7 @@
 
 <div class="my-2">
   <label class="switch">
-    <input name="multi_part_interests_calculation" type="checkbox" <%= checked(params: fixed_params[:multi_part_interests_calculation]) %>>
+    <input name="multi_part_interests_calculation" type="checkbox" <%= "checked" until params[:multi_part_interests_calculation] == false %>>
     <span class="slider round"></span>
   </label>
   <span>Capitalisation des échéances > 1 an</span>

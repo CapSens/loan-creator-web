@@ -14,7 +14,7 @@ module LoanCreatorWeb
         h[:starts_on] = to_right_format(params: 'starts_on', value: params[:starts_on])
         h[:duration_in_periods] = to_right_format(params: 'duration_in_periods', value: params[:duration_in_periods])
         h[:term_dates] = to_right_format(params: 'term_dates', value: params[:term_dates]) if params[:button] == 'update'
-        # h[:multi_part_interests_calculation] = false unless params[:multi_part_interests_calculation].nil?
+        h[:multi_part_interests_calculation] = false if params[:multi_part_interests_calculation].nil?
         h[:initial_values] = {}.tap do |ivh|
           ivh[:paid_capital] = to_right_format(params: 'paid_capital', value: params[:initial_values][:paid_capital])
           ivh[:paid_interests] = to_right_format(params: 'paid_interests', value: params[:initial_values][:paid_interests])
