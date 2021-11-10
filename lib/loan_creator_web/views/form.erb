@@ -8,7 +8,8 @@
 
 <div class="my-2">
   <label class="switch">
-    <input name="multi_part_interests_calculation" type="checkbox" <%= "checked" until !params[:multi_part_interests_calculation].present? %>>
+    <input id="hidden" name="multi_part_interests_calculation" type='hidden' value='off'>
+    <input id="nothidden" name="multi_part_interests_calculation" type="checkbox" value='on' <%= "checked" if params[:multi_part_interests_calculation] == "on" || !params[:multi_part_interests_calculation] %>>
     <span class="slider round"></span>
   </label>
   <span>Capitalisation des échéances > 1 an</span>
