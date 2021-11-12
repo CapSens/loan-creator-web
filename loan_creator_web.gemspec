@@ -28,5 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
 
   spec.add_runtime_dependency 'sinatra'
-  spec.add_runtime_dependency 'loan_creator'
+  spec.add_runtime_dependency 'loan_creator', '~> 0.11.0'
 end

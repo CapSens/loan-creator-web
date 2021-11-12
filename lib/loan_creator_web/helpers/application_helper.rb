@@ -1,7 +1,16 @@
 require 'pry'
+require 'date'
 
 module LoanCreatorWeb
   module ApplicationHelper
+
+    PERIODS_IN_MONTHS = {
+      month: 1,
+      quarter: 3,
+      semester: 6,
+      year: 12
+    }.freeze
+
     def fix_params_type(params)
       params = params.merge({ initial_values: {} }) if params[:initial_values].nil?
 
@@ -65,6 +74,13 @@ module LoanCreatorWeb
 
     def initial_values_for_form(initial_value)
       (initial_value.present? && initial_value.zero?) ? nil : initial_value
+    end
+
+    def build_term_dates_params
+      # need to catch the start date - one period to calculate the first term date due
+      start_date = to_right_format(params: 'starts_on', value: params[:starts_on])
+      start_date_previous_period = start_date.advance(months: -PERIODS_IN_MONTHS.fetch(params[:period].to_sym))
+      to_right_format(params: 'term_dates', value: params[:term_dates]).unshift(start_date_previous_period)
     end
   end
 end
