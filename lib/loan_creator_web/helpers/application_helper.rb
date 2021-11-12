@@ -23,7 +23,7 @@ module LoanCreatorWeb
         h[:starts_on] = to_right_format(params: 'starts_on', value: params[:starts_on])
         h[:duration_in_periods] = to_right_format(params: 'duration_in_periods', value: params[:duration_in_periods])
         h[:term_dates] = build_term_dates_params if params[:button] == 'update'
-        h[:multi_part_interests_calculation] = false # true unless params[:multi_part_interests_calculation] == "off"
+        h[:multi_part_interests_calculation] = false if params[:multi_part_interests_calculation].nil?
         h[:initial_values] = {}.tap do |ivh|
           ivh[:paid_capital] = to_right_format(params: 'paid_capital', value: params[:initial_values][:paid_capital])
           ivh[:paid_interests] = to_right_format(params: 'paid_interests', value: params[:initial_values][:paid_interests])
@@ -64,17 +64,23 @@ module LoanCreatorWeb
       value == params ? 'selected' : ''
     end
 
-    def number_to_euro(number)
-      "#{number} €"
+    def number_to_euro_rounded(number)
+      "#{number.round(2)} €"
     end
 
     def checked(params:)
       params ? 'checked' : ''
     end
 
-    # def multi_part_interests_calculation_params
-    #   params[:multi_part_interests_calculation] ? params[:multi_part_interests_calculation] = 'on' : params[:multi_part_interests_calculation] = 'off'
-    # end
+    def checked_default_true
+      if params[:checkbox_helper] && params[:multi_part_interests_calculation]
+        'checked'
+      elsif params[:checkbox_helper]
+        ''
+      else
+        'checked'
+      end
+    end
 
     def initial_values_for_form(initial_value)
       (initial_value.present? && initial_value.zero?) ? nil : initial_value

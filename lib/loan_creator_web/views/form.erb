@@ -8,10 +8,11 @@
 
 <div class="my-2">
   <label class="switch">
-    <input name="multi_part_interests_calculation" type="checkbox" value='on' <%= "checked" if params[:multi_part_interests_calculation] == "on" || !params[:multi_part_interests_calculation] %>>
+    <input name="checkbox_helper" type="hidden" value="on">
+    <input name="multi_part_interests_calculation" type="checkbox" <%= checked_default_true %>>
     <span class="slider round"></span>
   </label>
-  <span>Capitalisation des échéances > 1 an</span>
+  <span>Capitalization of maturities > 1 year</span>
 </div>
 
 <div class="row">
