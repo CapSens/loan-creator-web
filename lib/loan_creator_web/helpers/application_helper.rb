@@ -64,7 +64,7 @@ module LoanCreatorWeb
       value == params ? 'selected' : ''
     end
 
-    def number_to_euro_rounded(number)
+    def number_to_euro(number)
       "#{number.round(2)} €"
     end
 

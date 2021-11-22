@@ -3,11 +3,11 @@
   <td>
     <input type="date" class="form-control" name="term_dates[<%= term.index %>]" value= <%= term.due_on %>>
   </td>
-  <td><%= number_to_euro_rounded(term.period_amount_to_pay) %></td>
-  <td><%= number_to_euro_rounded(term.period_capital) %></td>
-  <td><%= number_to_euro_rounded(term.period_interests) %></td>
-  <td><%= number_to_euro_rounded(term.crd_end_of_period) %></td>
-  <td><%= number_to_euro_rounded(term.due_interests_end_of_period) %></td>
-  <td><%= number_to_euro_rounded(term.total_paid_capital_end_of_period) %></td>
-  <td><%= number_to_euro_rounded(term.total_paid_interests_end_of_period) %></td>
+  <td><%= number_to_euro(term.period_amount_to_pay) %></td>
+  <td><%= number_to_euro(term.period_capital) %></td>
+  <td><%= number_to_euro(term.period_interests) %></td>
+  <td><%= number_to_euro(term.crd_end_of_period) %></td>
+  <td><%= number_to_euro(term.due_interests_end_of_period) %></td>
+  <td><%= number_to_euro(term.total_paid_capital_end_of_period) %></td>
+  <td><%= number_to_euro(term.total_paid_interests_end_of_period) %></td>
 </tr>
