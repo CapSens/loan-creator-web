@@ -73,9 +73,9 @@ module LoanCreatorWeb
     end
 
     def checked_default_true
-      if params[:checkbox_helper] && params[:multi_part_interests_calculation]
+      if params[:multi_part_interests_calculation] == "1"
         'checked'
-      elsif params[:checkbox_helper]
+      elsif params[:multi_part_interests_calculation] == "0"
         ''
       else
         'checked'
