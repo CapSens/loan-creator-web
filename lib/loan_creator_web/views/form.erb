@@ -1,8 +1,19 @@
-<label class="switch">
-  <input name="realistic_durations" type="checkbox" <%= checked(params: fixed_params[:realistic_durations]) %>>
+<div>
+  <label class="switch">
+    <input name="realistic_durations" type="checkbox" <%= checked(params: fixed_params[:realistic_durations]) %>>
+    <span class="slider round"></span>
+  </label>
+  <span>Realistic duration</span>
+</div>
+
+<div class="my-2">
+  <label class="switch">
+  <input name="multi_part_interests_calculation" type="hidden" value="0" />
+  <input type="checkbox" name="multi_part_interests_calculation" value="1" <%= checked_default_true %>/>
   <span class="slider round"></span>
-</label>
-<span>Realistic duration</span>
+  </label>
+  <span>Capitalization of maturities > 1 year</span>
+</div>
 
 <div class="row">
   <div class="col form-group">
